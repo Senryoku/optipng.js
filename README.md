@@ -7,6 +7,8 @@ Tip: Optipng version is 0.7.7.
 
 Updated build script to work with more recent versions of emscripten, gaining a bit of performance. Newer version of emscripten emits WASM by default and we'll also take advantage of that, however the optipng() function signature had to be updated to take a callback (see pre.js) since the WASM version is asynchronous and promises are not available in Web Workers. An example Web Worker using the new signature is provided in src/optipng.worker.js.
 
+Note: Emscripten documentation explicitly warn against using pre-js to encapsulate the output in a function and encourage the use of `MODULARIZE`. If someone wants to publish a proper version of this library, they should probably take a look this way, but the current version works and it's enough for my purpose :^)
+
 ## API
 
 ### `optipng(file, callback, options, printFunction)`
