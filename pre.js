@@ -1,4 +1,4 @@
-function optipng(file, options, printFunction) {
+function optipng(file, callback, options, printFunction) {
     if (typeof file === 'undefined')
         return;
 
@@ -44,6 +44,28 @@ function optipng(file, options, printFunction) {
                 encoding: "binary"
             });
         }],
+		postRun() {
+			let output_file = null;
+
+			// Try to get output file.
+			try {
+				// read processed image data in file
+				output_file = FS.readFile("/output.png");
+			} catch (e) {
+				// Cleaning up input png from MEMFS
+				FS.unlink("/input.png");
+				return new Error("No output file: " + stderr);
+			}
+
+			// Cleanup files from
+			FS.unlink("/output.png");
+			FS.unlink("/input.png");
+
+			callback({
+				data: output_file,
+				stdout: stdout,
+				stderr: stderr,
+			});
+		},
         "arguments": args,
-        "ENVIRONMENT": "SHELL" // maximum compatibility???
     };

@@ -12,20 +12,15 @@ mkdir -p $SRC
 cd $DIR/deps/optipng
 
 # start configuring
-emconfigure ./configure
+LDFLAGS="-s TOTAL_MEMORY=256MB --pre-js ../../../../pre.js --post-js ../../../../post.js -flto" CFLAGS="-O3 -flto" emconfigure ./configure
 
 # Make it.
-emmake make
+emmake make -j
 
 cd $DIR/deps/optipng/src/optipng
 
-# If we can not find optipng file... Something must be wrong.
-mv optipng optipng.bc
-
-# Compite to javascript!
-emcc -03 optipng.bc -s LEGACY_VM_SUPPORT=1 -s TOTAL_MEMORY=256MB --pre-js ../../../../pre.js --post-js ../../../../post.js -o optipng.js
-
 # move to src.
-mv optipng.js $SRC/optipng.js
+mv optipng $SRC/optipng.js
+mv optipng.wasm $SRC/optipng.wasm
 
 echo "Successfully compiled optipng to javascript! Try to check $SRC"
