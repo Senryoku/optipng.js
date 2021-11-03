@@ -33,7 +33,7 @@
     }
 
     function loadWebWorker() {
-        worker = new Worker("js/worker.js");
+        worker = new Worker("js/optipng.worker.js");
 
         worker.onmessage = function(event) {
             var message = event.data;
