@@ -86,9 +86,6 @@ optipng(input, callback, ["-o2"], function(str) {
 ## Full Example
 
 ### Node.js
-```
-$ npm i -S optipng-js
-```
 
 ```javascript
 var optipng = require("optipng-js");
@@ -102,7 +99,7 @@ optipng(input, (output) => {
             stdout: output string,
             stderr: error string
         }
-    */);
+    */
     fs.writeFileSync("output.png", output.data);
     console.log(output.stdout);
     console.log(output.stderr
@@ -111,7 +108,7 @@ optipng(input, (output) => {
 ```
 
 ### Browser
-Please check Demo with Web worker. [https://li-na.github.io/optipng.js/](https://li-na.github.io/optipng.js/)
+Please check Demo with Web worker. [https://senryoku.github.io/optipng.js/](https://senryoku.github.io/optipng.js/)
 
 ## Build
 Actually, I don't know what it is but I made build shell script and it seems working. Please let me know if you have ANY better way to build this project.
@@ -120,7 +117,7 @@ You have to setup emscripten sdk on [here](http://kripken.github.io/emscripten-s
 
 Then, download or clone this git on your linux computer. (Windows does not supported at this moment)
 ```
-$ git clone https://github.com/LI-NA/optipng.js
+$ git clone https://github.com/Senryoku/optipng.js
 ```
 
 Finally, just run `./build.sh`. It will configure optipng and compile with emcc.
